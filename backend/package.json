@@ -1,0 +1,19 @@
+{
+  "name": "community_notifier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cors": "^2.8.4",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.5",
+    "node-notifier": "^5.2.1",
+    "open": "0.0.5"
+  }
+}
