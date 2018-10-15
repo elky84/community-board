@@ -80,13 +80,12 @@ export default {
   methods: {
     getArchives (searchData) {
       var vm = this
-      this.$http.get('http://127.0.0.1:8082/api/archives', {params: searchData})
+      this.$http.get(`${process.env.URL_BACKEND}/api/archives`, {params: searchData})
         .then((result) => {
           vm.archives = result.data
         })
     },
     parentSearching (searchData) {
-      debugger
       this.getArchives(searchData)
     }
   }
