@@ -1,5 +1,5 @@
 'use strict'
 module.exports = {
   NODE_ENV: '"production"',
-  URL_BACKEND: '"http://172.30.1.70:8082"'
+  URL_BACKEND: '"http://elky.tk:28082"'
 }

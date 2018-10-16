@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 
 // [CONFIGURE SERVER PORT]
 
-var port = process.env.PORT || 8082;
+var port = process.env.PORT || 28082;
 
 // [CONFIGURE ROUTER]
 var router = require('./routes')(app, archive);

@@ -4,5 +4,5 @@ const devEnv = require('./dev.env')
 
 module.exports = merge(devEnv, {
   NODE_ENV: '"testing"',
-  URL_BACKEND: '"http://127.0.0.1:8082"'
+  URL_BACKEND: '"http://127.0.0.1:28082"'
 })
