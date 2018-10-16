@@ -15,6 +15,7 @@ module.exports = function(app, Archive)
             if(err) return res.status(500).send({error: 'database failure'});
             res.json(archives);
         })
+        .sort( {date: -1})
         .limit(20).skip(20 * req.query.page)
     });
 
