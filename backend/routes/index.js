@@ -11,12 +11,15 @@ module.exports = function(app, Archive)
             query["title"] = {$regex: '.*' + req.query.title + '.*'};
         }
 
-        Archive.find(query, function(err, archives){
-            if(err) return res.status(500).send({error: 'database failure'});
-            res.json(archives);
-        })
-        .sort( {date: -1})
-        .limit(20).skip(20 * req.query.page)
+        var options = {
+            sort: {date: -1},
+            offset: Number(req.query.offset),
+            limit: Number(req.query.limit),
+        }
+
+        Archive.paginate(query, options).then(function(result){
+            res.json(result);
+        });
     });
 
     // GET SINGLE ARCHIVE

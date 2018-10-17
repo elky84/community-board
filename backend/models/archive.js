@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
+
 var Schema = mongoose.Schema;
 
 var archiveSchema = new Schema({
@@ -12,4 +14,5 @@ var archiveSchema = new Schema({
     update: { type: Date  }
 }, {collection: 'archive'});
 
+archiveSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('archive', archiveSchema);

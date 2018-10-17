@@ -26,11 +26,19 @@
         </template>
       </tbody>
     </table>
+
+    <paginate ref="paginate" :page-count="viewPageCount" :page-range="5" :margin-pages="1" :click-handler="listing" :prev-text="'Prev'" :next-text="'Next'"
+      :container-class="'pagination justify-content-center'" :page-class="'page-item'" :page-link-class="'page-link'"
+      :prev-class="'page-item'" :prev-link-class="'page-link'" :next-class="'page-item'" :next-link-class="'page-link'"
+      :active-class="'active'" :disabled-class="'disabled'">
+    </paginate>
   </div>
 </template>
 
 <script>
 import ArchivesSearchForm from './ArchivesSearchForm'
+import Paginate from 'vuejs-paginate'
+import Qs from 'qs'
 
 export const ARCHIVE_TYPE = {
   Clien: {
@@ -46,7 +54,7 @@ export const ARCHIVE_TYPE = {
     label: 'badge-success'
   },
   Todayhumor: {
-    text: '오유',
+    text: '오늘의유머',
     label: 'badge-danger'
   },
   RuliwebHobby: {
@@ -66,12 +74,19 @@ export const ARCHIVE_TYPE = {
 export default {
   name: 'Archives',
   components: {
-    ArchivesSearchForm: ArchivesSearchForm
+    ArchivesSearchForm: ArchivesSearchForm,
+    Paginate
   },
   data () {
     return {
       archives: [],
-      ARCHIVE_TYPE_LIST: ARCHIVE_TYPE
+      ARCHIVE_TYPE_LIST: ARCHIVE_TYPE,
+      currentPage: 1,
+      viewPageCount: 1,
+      totalItems: 0,
+      rowNumDeduction: 1,
+      limit: 20,
+      searchData: {}
     }
   },
   mounted () {
@@ -79,14 +94,36 @@ export default {
   },
   methods: {
     getArchives (searchData) {
+      this.searchData = searchData
       var vm = this
-      this.$http.get(`${process.env.URL_BACKEND}/api/archives`, {params: searchData})
+      this.$http.get(`${process.env.URL_BACKEND}/api/archives`, {
+        params: {
+          offset: this.limit * (this.currentPage - 1),
+          limit: this.limit
+        },
+        paramsSerializer (params) {
+          return Qs.stringify($.extend(params, searchData), {
+            skipNulls: true,
+            allowDots: true,
+            encode: false,
+            arrayFormat: 'repeat'
+          })
+        }})
         .then((result) => {
-          vm.archives = result.data
+          this.viewPageCount = Math.ceil(result.data.total / this.limit)
+          this.totalItems = result.data.total
+          this.rowNumDeduction = (this.currentPage - 1) * this.limit
+
+          vm.archives = result.data.docs
         })
     },
     parentSearching (searchData) {
       this.getArchives(searchData)
+    },
+    listing (page) {
+      this.currentPage = page
+      this.$refs.paginate.value = page
+      this.getArchives(this.searchData)
     }
   }
 }
