@@ -8,7 +8,8 @@ var archiveSchema = new Schema({
     count: Number,
     title: String,
     read: Boolean,
-    date: { type: Date, default: Date.now  }
+    date: { type: Date, default: Date.now  },
+    update: { type: Date  }
 }, {collection: 'archive'});
 
 module.exports = mongoose.model('archive', archiveSchema);

@@ -19,23 +19,23 @@ export default {
 }
 
 .element {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .form-control {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .label {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .nav {
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .dropdown-item {
-  font-size: 15px;
+  font-size: 12px;
 }
 
 </style>

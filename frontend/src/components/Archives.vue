@@ -7,10 +7,10 @@
     <table class="table table-bordered">
       <thead class="thead-dark">
         <tr class="text-center">
-          <th width="50px">타입</th>
-          <th width="*">타이틀</th>
-          <th width="50px">히트</th>
-          <th width="200px">시간</th>
+          <th width="50px"><span class="header">타입</span></th>
+          <th width="*"><span class="header">타이틀</span></th>
+          <th width="30px"><span class="header">히트</span></th>
+          <th width="150px"><span class="header">시간</span></th>
         </tr>
       </thead>
       <tbody>
@@ -20,8 +20,8 @@
               {{ARCHIVE_TYPE_LIST[archive.type].text}}
             </span></td>
             <td><a v-bind:href=archive.link target="_blank">{{archive.title}}</a></td>
-            <td>{{archive.count}}</td>
-            <td>{{archive.date}}</td>
+            <td><span class="count">{{archive.count}}</span></td>
+            <td><span class="time">{{ moment(archive.date).format('YYYY-MM-DD h:mm:ss a') }}</span></td>
           </tr>
         </template>
       </tbody>
@@ -91,3 +91,16 @@ export default {
   }
 }
 </script>
+
+<style>
+.header {
+  font-size: 12px;
+}
+.count {
+  font-size: 12px;
+}
+.time {
+  font-size: 12px;
+}
+
+</style>
