@@ -9,8 +9,8 @@
         <tr class="text-center">
           <th width="50px"><span class="header">타입</span></th>
           <th width="*"><span class="header">타이틀</span></th>
-          <th width="40px"><span class="header">히트</span></th>
-          <th width="150px"><span class="header">시간</span></th>
+          <th width="*"><span class="header">히트</span></th>
+          <th width="*"><span class="header">시간</span></th>
         </tr>
       </thead>
       <tbody>
