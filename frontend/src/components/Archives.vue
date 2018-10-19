@@ -7,10 +7,10 @@
     <table class="table table-bordered">
       <thead class="thead-dark">
         <tr class="text-center">
-          <th width="50px"><span class="header">타입</span></th>
-          <th width="*"><span class="header">타이틀</span></th>
-          <th width="*"><span class="header">히트</span></th>
-          <th width="*"><span class="header">시간</span></th>
+          <th width=90px><span class="header">타입</span></th>
+          <th><span class="header">제목</span></th>
+          <th><span class="header">히트</span></th>
+          <th width=120px><span class="header">시간</span></th>
         </tr>
       </thead>
       <tbody>
@@ -19,9 +19,9 @@
             <td><span class="badge" v-bind:class=ARCHIVE_TYPE_LIST[archive.type].label>
               {{ARCHIVE_TYPE_LIST[archive.type].text}}
             </span></td>
-            <td><a v-bind:href=archive.link target="_blank">{{archive.title}}</a></td>
-            <td><span class="count">{{archive.count}}</span></td>
-            <td><span class="time">{{ moment(archive.date).format('YYYY-MM-DD h:mm:ss a') }}</span></td>
+            <td align="center"><span class="link"><a v-bind:href=archive.link target="_blank">{{archive.title}}</a></span></td>
+            <td align="center"><span class="count">{{archive.count}}</span></td>
+            <td align="center"><span class="time">{{ moment(archive.date).format('YYYY-MM-DD HH:mm') }}</span></td>
           </tr>
         </template>
       </tbody>
@@ -137,6 +137,9 @@ export default {
   font-size: 12px;
 }
 .time {
+  font-size: 12px;
+}
+.link {
   font-size: 12px;
 }
 
