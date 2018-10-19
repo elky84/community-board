@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h2><i class="fas fa-language"></i>커뮤니티 보드</h2>
     <router-view/>
   </div>
 </template>

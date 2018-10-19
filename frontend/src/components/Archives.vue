@@ -1,6 +1,5 @@
 <template>
   <div class="container-fluid">
-    <h2><i class="fas fa-language"></i>Archives</h2>
     <archives-searchForm @searching="parentSearching(... arguments)" ref="searchForm"
       :ARCHIVE_TYPE_LIST="ARCHIVE_TYPE_LIST"></archives-searchForm>
 
@@ -10,24 +9,24 @@
           <th width=90px><span class="header">타입</span></th>
           <th><span class="header">제목</span></th>
           <th><span class="header">히트</span></th>
-          <th width=120px><span class="header">시간</span></th>
+          <th><span class="header">시간</span></th>
         </tr>
       </thead>
       <tbody>
         <template v-for="(archive) in archives">
           <tr class='cursor-pointer' :key="archive._id">
-            <td><span class="badge" v-bind:class=ARCHIVE_TYPE_LIST[archive.type].label>
+            <td align="center"><span class="badge" v-bind:class=ARCHIVE_TYPE_LIST[archive.type].label>
               {{ARCHIVE_TYPE_LIST[archive.type].text}}
             </span></td>
             <td align="center"><span class="link"><a v-bind:href=archive.link target="_blank">{{archive.title}}</a></span></td>
             <td align="center"><span class="count">{{archive.count}}</span></td>
-            <td align="center"><span class="time">{{ moment(archive.date).format('YYYY-MM-DD HH:mm') }}</span></td>
+            <td align="center"><span class="time">{{ momentTime(archive.date) }}</span></td>
           </tr>
         </template>
       </tbody>
     </table>
 
-    <paginate ref="paginate" :page-count="viewPageCount" :page-range="5" :margin-pages="1" :click-handler="listing" :prev-text="'Prev'" :next-text="'Next'"
+    <paginate ref="paginate" :page-count="viewPageCount" :page-range="3" :margin-pages="1" :click-handler="listing" :prev-text="'Prev'" :next-text="'Next'"
       :container-class="'pagination justify-content-center'" :page-class="'page-item'" :page-link-class="'page-link'"
       :prev-class="'page-item'" :prev-link-class="'page-link'" :next-class="'page-item'" :next-link-class="'page-link'"
       :active-class="'active'" :disabled-class="'disabled'">
@@ -39,6 +38,7 @@
 import ArchivesSearchForm from './ArchivesSearchForm'
 import Paginate from 'vuejs-paginate'
 import Qs from 'qs'
+import moment from 'moment'
 
 export const ARCHIVE_TYPE = {
   Clien: {
@@ -124,6 +124,17 @@ export default {
       this.currentPage = page
       this.$refs.paginate.value = page
       this.getArchives(this.searchData)
+    },
+    momentTime (date) {
+      var format = 'YYYY-MM-DD'
+      let today = moment().format(format)
+      let archiveDate = moment(date).format(format)
+
+      if (today === archiveDate) {
+        return moment(date).format('HH:mm:ss')
+      } else {
+        return moment(date).format('YYYY-MM-DD HH:mm')
+      }
     }
   }
 }
