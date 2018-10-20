@@ -25,12 +25,12 @@
         </tr>
       </thead>
       <tbody>
-        <template v-for="(archive) in archives">
-          <tr class='cursor-pointer' :key="archive._id">
+        <template v-for="(archive, index) in archives">
+          <tr class="cursor-pointer" :class="tdColoring(archive)" :key="archive._id">
             <td align="center"><span class="badge" v-bind:class=ARCHIVE_TYPE_LIST[archive.type].label>
               {{ARCHIVE_TYPE_LIST[archive.type].text}}
             </span></td>
-            <td align="center"><span class="link"><a v-bind:href=archive.link target="_blank">{{archive.title}}</a></span></td>
+            <td align="center" v-on:click="onClickLink(archive)"><span class="link"><a @click.prevent="onClickLink(archive, index)" v-bind:href=archive.link target="_blank">{{archive.title}}</a></span></td>
             <td align="center"><span class="count">{{archive.count}}</span></td>
             <td align="center"><span class="time">{{ momentTime(archive.date) }}</span></td>
           </tr>
@@ -170,6 +170,17 @@ export default {
       }
 
       return this.orderState[key] > 0 ? 'asc' : 'dsc'
+    },
+    tdColoring (archive) {
+      return archive.read == null || archive.read === false ? 'unread' : 'read'
+    },
+    onClickLink (archive, index) {
+      archive.read = true
+      var vm = this
+      this.$http.put(`${process.env.URL_BACKEND}/api/archives/${archive._id}`, archive).then((result) => {
+        vm.archives[index] = archive
+        vm.$forceUpdate()
+      })
     }
   }
 }
@@ -209,6 +220,14 @@ export default {
 }
 .link {
   font-size: 12px;
+}
+
+.cursor-pointer.unread {
+  background: #FFFFFF;
+}
+
+.cursor-pointer.read {
+  background: #EEEEEE;
 }
 
 </style>

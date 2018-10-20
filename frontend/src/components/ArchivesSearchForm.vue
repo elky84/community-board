@@ -4,8 +4,13 @@
         <div class="form-inline">
           <input type="text" class="form-control form-control-sm" v-model="searchProtocol.title" placeholder="제목 (like 검색)">
           <select class="form-control form-control-sm" v-model="searchProtocol.type" name="type">
-            <option :value=null>타입</option>
+            <option :value=null>타입 (전체)</option>
             <option v-for="(value, key) in ARCHIVE_TYPE_LIST" :value="key" :key="value.text">{{value.text}}</option>
+          </select>
+
+          <select class="form-control form-control-sm" v-model="searchProtocol.read" name="type">
+            <option :value=null>읽기 (전체)</option>
+            <option v-for="(value) in READ_STATE_LIST" :value="value.value" :key="value.text">{{value.text}}</option>
           </select>
 
           <button type="submit" class="btn btn-sm btn-primary">검색<i class="fa fa-sm fa-search"></i></button>&nbsp;
@@ -23,11 +28,23 @@ const SEARCH_PROTOCOL = {
 }
 Object.freeze(SEARCH_PROTOCOL)
 
+export const READ_STATE = {
+  Read: {
+    text: '읽음',
+    value: true
+  },
+  Unread: {
+    text: '읽지 않음',
+    value: false
+  }
+}
+
 export default {
   props: ['ARCHIVE_TYPE_LIST'],
   data () {
     return {
-      searchProtocol: Object.assign({}, SEARCH_PROTOCOL)
+      searchProtocol: Object.assign({}, SEARCH_PROTOCOL),
+      READ_STATE_LIST: READ_STATE
     }
   },
   mounted () {

@@ -4,11 +4,15 @@ module.exports = function(app, Archive)
     app.get('/api/archives', function(req,res){
         var query = {};
         if( req.query.type != undefined ) {
-            query["type"] = req.query.type
+            query["type"] = req.query.type;
         }
 
         if( req.query.title != undefined) {
             query["title"] = {$regex: '.*' + req.query.title + '.*'};
+        }
+
+        if( req.query.read != undefined) {
+            query["read"] = req.query.read === true ? true : null;
         }
 
         var options = {
