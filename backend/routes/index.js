@@ -1,4 +1,4 @@
-var moment      = require('moment');
+var moment = require('moment')
 
 module.exports = function(app, Archive)
 {
@@ -44,7 +44,6 @@ module.exports = function(app, Archive)
         archive.type = req.body.type;
         archive.link = req.body.link;
         archive.count = req.body.count;
-        archive.date = new Date(req.body.date);
 
         archive.save(function(err){
             if(err){
@@ -58,13 +57,7 @@ module.exports = function(app, Archive)
     });
 
     // UPDATE THE ARCHIVE
-    app.put('/api/archives/:_id', function(req, res){
-        req.body.date = new Date(req.body.date)
-
-        if(req.body.update != undefined) {
-            req.body.update = new Date(req.body.date)
-        }
-        
+    app.put('/api/archives/:_id', function(req, res){        
         Archive.update({ _id: req.params._id }, { $set: req.body }, function(err, output){
             if(err) res.status(500).json({ error: 'database failure' });
             console.log(output);
