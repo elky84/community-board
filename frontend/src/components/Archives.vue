@@ -7,19 +7,19 @@
       <thead class="thead-dark">
         <tr class="text-center">
           <th width=90px v-on:click="sortBy('type')">
-            <span class="header">타입</span>
+            <span class="header">TYPE</span>
             <span class="arrow" :class="toArrow('type')"/>
           </th>
           <th v-on:click="sortBy('title')">
-            <span class="header">제목</span>
+            <span class="header">TITLE</span>
             <span class="arrow" :class="toArrow('title')"/>
           </th>
-          <th v-on:click="sortBy('count')">
-            <span class="header">히트</span>
+          <th width=70px v-on:click="sortBy('count')">
+            <span class="header">HIT</span>
             <span class="arrow" :class="toArrow('count')"/>
           </th>
-          <th v-on:click="sortBy('date')">
-            <span class="header">시간</span>
+          <th width=100px v-on:click="sortBy('date')">
+            <span class="header">TIME</span>
             <span class="arrow" :class="toArrow('date')"/>
           </th>
         </tr>
@@ -31,7 +31,7 @@
               {{ARCHIVE_TYPE_LIST[archive.type].text}}
             </span></td>
             <td align="center"><span class="link"><a v-bind:href=archive.link>{{archive.title}}</a></span></td>
-            <td align="center"><span class="count">{{archive.count}}</span></td>
+            <td align="center"><span class="count">{{abbreviation(archive.count)}}</span></td>
             <td align="center"><span class="time">{{ momentTime(archive.date) }}</span></td>
           </tr>
         </template>
@@ -51,6 +51,7 @@ import ArchivesSearchForm from './ArchivesSearchForm'
 import Paginate from 'vuejs-paginate'
 import Qs from 'qs'
 import moment from 'moment'
+import abbreviate from 'number-abbreviate'
 
 export const ARCHIVE_TYPE = {
   Clien: {
@@ -87,7 +88,8 @@ export default {
   name: 'Archives',
   components: {
     ArchivesSearchForm: ArchivesSearchForm,
-    Paginate
+    Paginate,
+    abbreviate
   },
   data () {
     return {
@@ -182,6 +184,9 @@ export default {
         vm.$forceUpdate()
         window.open(archive.link, '_blank')
       })
+    },
+    abbreviation (number) {
+      return abbreviate(number)
     }
   }
 }
