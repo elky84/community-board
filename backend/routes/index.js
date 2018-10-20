@@ -59,7 +59,12 @@ module.exports = function(app, Archive)
 
     // UPDATE THE ARCHIVE
     app.put('/api/archives/:_id', function(req, res){
+        req.body.date = new Date(req.body.date)
 
+        if(req.body.update != undefined) {
+            req.body.update = new Date(req.body.date)
+        }
+        
         Archive.update({ _id: req.params._id }, { $set: req.body }, function(err, output){
             if(err) res.status(500).json({ error: 'database failure' });
             console.log(output);
