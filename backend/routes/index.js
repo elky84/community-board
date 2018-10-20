@@ -12,9 +12,9 @@ module.exports = function(app, Archive)
         }
 
         var options = {
-            sort: {date: -1},
-            offset: Number(req.query.offset),
-            limit: Number(req.query.limit),
+            sort: req.query.sort == undefined ? {date: -1} : JSON.parse(req.query.sort),
+            offset: req.query.offset == undefined ? 0 : Number(req.query.offset),
+            limit: req.query.limit == undefined ? 20 : Number(req.query.limit),
         }
 
         Archive.paginate(query, options).then(function(result){

@@ -6,10 +6,22 @@
     <table class="table table-bordered">
       <thead class="thead-dark">
         <tr class="text-center">
-          <th width=90px><span class="header">타입</span></th>
-          <th><span class="header">제목</span></th>
-          <th><span class="header">히트</span></th>
-          <th><span class="header">시간</span></th>
+          <th width=90px v-on:click="sortBy('type')">
+            <span class="header">타입</span>
+            <span class="arrow" :class="toArrow('type')"/>
+          </th>
+          <th v-on:click="sortBy('title')">
+            <span class="header">제목</span>
+            <span class="arrow" :class="toArrow('title')"/>
+          </th>
+          <th v-on:click="sortBy('count')">
+            <span class="header">히트</span>
+            <span class="arrow" :class="toArrow('count')"/>
+          </th>
+          <th v-on:click="sortBy('date')">
+            <span class="header">시간</span>
+            <span class="arrow" :class="toArrow('date')"/>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -86,7 +98,9 @@ export default {
       totalItems: 0,
       rowNumDeduction: 1,
       limit: 20,
-      searchData: {}
+      searchData: {},
+      sort: null,
+      orderState: {title: null, type: null, count: null, date: null}
     }
   },
   mounted () {
@@ -95,11 +109,13 @@ export default {
   methods: {
     getArchives (searchData) {
       this.searchData = searchData
+
       var vm = this
       this.$http.get(`${process.env.URL_BACKEND}/api/archives`, {
         params: {
           offset: this.limit * (this.currentPage - 1),
-          limit: this.limit
+          limit: this.limit,
+          sort: JSON.stringify(this.sort)
         },
         paramsSerializer (params) {
           return Qs.stringify($.extend(params, searchData), {
@@ -135,12 +151,53 @@ export default {
       } else {
         return moment(date).format('YYYY-MM-DD HH:mm')
       }
+    },
+    sortBy (key) {
+      this.orderState[key] = this.orderState[key] == null ? -1 : this.orderState[key] * -1
+      for (var orderKey in this.orderState) {
+        if (key !== orderKey) {
+          this.orderState[orderKey] = null
+        }
+      }
+
+      this.sort = {[key]: this.orderState[key]}
+
+      this.getArchives(this.searchData)
+    },
+    toArrow (key) {
+      if (this.orderState[key] == null) {
+        return 'none'
+      }
+
+      return this.orderState[key] > 0 ? 'asc' : 'dsc'
     }
   }
 }
 </script>
 
 <style>
+
+.arrow {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    opacity: 0.66;
+}
+
+.arrow.asc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #FFFFFF;
+}
+
+.arrow.dsc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #FFFFFF;
+}
+
 .header {
   font-size: 12px;
 }
