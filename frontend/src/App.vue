@@ -16,7 +16,11 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin-top: 60px;
+  margin-top: 40px;
+}
+
+table {
+  width: 100%;
 }
 
 .element {
@@ -37,6 +41,10 @@ export default {
 
 .dropdown-item {
   font-size: 12px;
+}
+
+.badge.block-badge {
+  display: block;
 }
 
 </style>

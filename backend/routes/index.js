@@ -18,7 +18,7 @@ module.exports = function(app, Archive)
         }
 
         var options = {
-            sort: req.query.sort == null ? {date: -1} : JSON.parse(req.query.sort),
+            sort: req.query.sort == undefined ? {date: -1} : JSON.parse(req.query.sort),
             offset: req.query.offset == undefined ? 0 : Number(req.query.offset),
             limit: req.query.limit == undefined ? 20 : Number(req.query.limit),
         }

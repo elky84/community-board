@@ -6,7 +6,7 @@
     <table class="table table-bordered">
       <thead class="thead-dark">
         <tr class="text-center">
-          <th width=90px v-on:click="sortBy('type')">
+          <th width="70px" v-on:click="sortBy('type')">
             <span class="header">TYPE</span>
             <span class="arrow" :class="toArrow('type')"/>
           </th>
@@ -14,11 +14,11 @@
             <span class="header">TITLE</span>
             <span class="arrow" :class="toArrow('title')"/>
           </th>
-          <th width=70px v-on:click="sortBy('count')">
+          <th width="60px" v-on:click="sortBy('count')">
             <span class="header">HIT</span>
             <span class="arrow" :class="toArrow('count')"/>
           </th>
-          <th width=100px v-on:click="sortBy('date')">
+          <th width="70px" v-on:click="sortBy('date')">
             <span class="header">TIME</span>
             <span class="arrow" :class="toArrow('date')"/>
           </th>
@@ -27,7 +27,7 @@
       <tbody>
         <template v-for="(archive, index) in archives">
           <tr class="cursor-pointer" :class="tdColoring(archive)" :key="archive._id" @click.prevent="onClickLink(archive, index)">
-            <td align="center"><span class="badge" v-bind:class=ARCHIVE_TYPE_LIST[archive.type].label>
+            <td align="center"><span class="badge block-badge" v-bind:class=ARCHIVE_TYPE_LIST[archive.type].label>
               {{ARCHIVE_TYPE_LIST[archive.type].text}}
             </span></td>
             <td align="center"><span class="link"><a v-bind:href=archive.link>{{archive.title}}</a></span></td>
@@ -63,23 +63,23 @@ export const ARCHIVE_TYPE = {
     label: 'badge-secondary'
   },
   Slrclub: {
-    text: 'Slrclub',
+    text: 'SlrClub',
     label: 'badge-success'
   },
   Todayhumor: {
-    text: '오늘의유머',
+    text: '오유',
     label: 'badge-danger'
   },
   RuliwebHobby: {
-    text: '루리웹_취미',
+    text: '루리웹취미',
     label: 'badge-warning'
   },
   RuliwebHumor: {
-    text: '루리웹_유머',
+    text: '루리웹유머',
     label: 'badge-info'
   },
   RuliwebHotdeal: {
-    text: '루리웹_핫딜',
+    text: '루리웹핫딜',
     label: 'badge-dark'
   }
 }
@@ -101,7 +101,7 @@ export default {
       rowNumDeduction: 1,
       limit: 20,
       searchData: {},
-      sort: null,
+      sort: undefined,
       orderState: {title: null, type: null, count: null, date: null}
     }
   },
@@ -204,12 +204,14 @@ export default {
 }
 
 .arrow.asc {
+    display: inline-block;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-bottom: 4px solid #FFFFFF;
 }
 
 .arrow.dsc {
+    display: inline-block;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-top: 4px solid #FFFFFF;
