@@ -1,3 +1,5 @@
+var moment      = require('moment');
+
 module.exports = function(app, Archive)
 {
     // GET ALL ARCHIVES
@@ -16,7 +18,7 @@ module.exports = function(app, Archive)
         }
 
         var options = {
-            sort: req.query.sort == undefined ? {date: -1} : JSON.parse(req.query.sort),
+            sort: req.query.sort == null ? {date: -1} : JSON.parse(req.query.sort),
             offset: req.query.offset == undefined ? 0 : Number(req.query.offset),
             limit: req.query.limit == undefined ? 20 : Number(req.query.limit),
         }
@@ -57,6 +59,7 @@ module.exports = function(app, Archive)
 
     // UPDATE THE ARCHIVE
     app.put('/api/archives/:_id', function(req, res){
+
         Archive.update({ _id: req.params._id }, { $set: req.body }, function(err, output){
             if(err) res.status(500).json({ error: 'database failure' });
             console.log(output);

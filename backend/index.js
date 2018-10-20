@@ -1,12 +1,11 @@
 const open = require('open');
-const notifier = require('node-notifier');
 
 var express     = require('express');
 var app         = express();
 var bodyParser  = require('body-parser');
 var mongoose    = require('mongoose');
-var cors        = require('cors')
- 
+var cors        = require('cors');
+
 app.use(cors())
 
 var db = mongoose.connection;
@@ -16,6 +15,7 @@ db.once('open', function(){
     console.log("Connected to mongod server");
 });
 
+mongoose.Promise = require('bluebird')
 var promise = mongoose.connect('mongodb://localhost/test_crawler', {
     useMongoClient: true
 });

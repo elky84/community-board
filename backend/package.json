@@ -9,12 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.2",
     "body-parser": "^1.15.0",
     "cors": "^2.8.4",
     "express": "^4.13.4",
+    "moment": "^2.22.2",
     "mongoose": "^4.4.5",
     "mongoose-paginate": "^5.0.3",
-    "node-notifier": "^5.2.1",
     "open": "0.0.5"
   }
 }

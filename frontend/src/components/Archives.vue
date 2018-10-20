@@ -26,11 +26,11 @@
       </thead>
       <tbody>
         <template v-for="(archive, index) in archives">
-          <tr class="cursor-pointer" :class="tdColoring(archive)" :key="archive._id">
+          <tr class="cursor-pointer" :class="tdColoring(archive)" :key="archive._id" @click.prevent="onClickLink(archive, index)">
             <td align="center"><span class="badge" v-bind:class=ARCHIVE_TYPE_LIST[archive.type].label>
               {{ARCHIVE_TYPE_LIST[archive.type].text}}
             </span></td>
-            <td align="center" v-on:click="onClickLink(archive)"><span class="link"><a @click.prevent="onClickLink(archive, index)" v-bind:href=archive.link target="_blank">{{archive.title}}</a></span></td>
+            <td align="center"><span class="link"><a v-bind:href=archive.link>{{archive.title}}</a></span></td>
             <td align="center"><span class="count">{{archive.count}}</span></td>
             <td align="center"><span class="time">{{ momentTime(archive.date) }}</span></td>
           </tr>
@@ -180,6 +180,7 @@ export default {
       this.$http.put(`${process.env.URL_BACKEND}/api/archives/${archive._id}`, archive).then((result) => {
         vm.archives[index] = archive
         vm.$forceUpdate()
+        window.open(archive.link, '_blank')
       })
     }
   }
