@@ -10,17 +10,17 @@
             <span class="header">TYPE</span>
             <span class="arrow" :class="toArrow('type')"/>
           </th>
-          <th v-on:click="sortBy('title')">
+          <th width="*" v-on:click="sortBy('title')">
             <span class="header">TITLE</span>
             <span class="arrow" :class="toArrow('title')"/>
-          </th>
-          <th width="60px" v-on:click="sortBy('count')">
-            <span class="header">HIT</span>
-            <span class="arrow" :class="toArrow('count')"/>
           </th>
           <th width="70px" v-on:click="sortBy('date')">
             <span class="header">TIME</span>
             <span class="arrow" :class="toArrow('date')"/>
+          </th>
+          <th width="60px" v-on:click="sortBy('count')">
+            <span class="header">HIT</span>
+            <span class="arrow" :class="toArrow('count')"/>
           </th>
         </tr>
       </thead>
@@ -31,8 +31,8 @@
               {{ARCHIVE_TYPE_LIST[archive.type].text}}
             </span></td>
             <td align="center"><span class="link"><a v-bind:href=archive.link>{{archive.title}}</a></span></td>
-            <td align="center"><span class="count">{{abbreviation(archive.count)}}</span></td>
             <td align="center"><span class="time">{{ momentTime(archive.date) }}</span></td>
+            <td align="center"><span class="count">{{abbreviation(archive.count)}}</span></td>
           </tr>
         </template>
       </tbody>
@@ -205,20 +205,23 @@ export default {
 
 .arrow.asc {
     display: inline-block;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-bottom: 4px solid #FFFFFF;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid #FFFFFF;
 }
 
 .arrow.dsc {
     display: inline-block;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #FFFFFF;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 3px solid #FFFFFF;
 }
 
-.header {
+.badge {
   font-size: 12px;
+}
+.header {
+  font-size: 11px;
 }
 .count {
   font-size: 12px;
