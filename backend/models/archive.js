@@ -11,7 +11,8 @@ var archiveSchema = new Schema({
     title: String,
     read: Boolean,
     date: { type: Date, default: Date.now },
-    update: { type: Date }
+    update: { type: Date },
+    notify: Boolean
 }, {collection: 'archive', versionKey: false});
 
 archiveSchema.plugin(mongoosePaginate);
