@@ -14,12 +14,12 @@
             <span class="header">TITLE</span>
             <span class="arrow" :class="toArrow('title')"/>
           </th>
-          <th width="70px" v-on:click="sortBy('date')">
+          <th width="60px" v-on:click="sortBy('date')">
             <span class="header">TIME</span>
             <span class="arrow" :class="toArrow('date')"/>
           </th>
-          <th width="60px" v-on:click="sortBy('count')">
-            <span class="header">HIT</span>
+          <th width="50px" v-on:click="sortBy('count')">
+            <span class="header">R</span>
             <span class="arrow" :class="toArrow('count')"/>
           </th>
         </tr>
@@ -221,13 +221,13 @@ export default {
   font-size: 12px;
 }
 .header {
-  font-size: 11px;
+  font-size: 10px;
 }
 .count {
-  font-size: 12px;
+  font-size: 11px;
 }
 .time {
-  font-size: 12px;
+  font-size: 11px;
 }
 .link {
   font-size: 12px;
