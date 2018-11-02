@@ -13,9 +13,10 @@ import '@/assets/css/main.css'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueLocalStorage from 'vue-localstorage'
 
 Vue.prototype.moment = moment
-
+Vue.use(VueLocalStorage)
 Vue.use(BootstrapVue)
 
 Vue.prototype.$http = axios

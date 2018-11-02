@@ -106,7 +106,9 @@ export default {
     }
   },
   mounted () {
-    this.getArchives(null)
+    if (!this.searchData) {
+      this.getArchives(this.searchData)
+    }
   },
   methods: {
     getArchives (searchData) {
@@ -151,7 +153,7 @@ export default {
       if (today === archiveDate) {
         return moment(date).format('HH:mm:ss')
       } else {
-        return moment(date).format('YYYY-MM-DD HH:mm')
+        return moment(date).format('YYYY-MM-DD')
       }
     },
     sortBy (key) {

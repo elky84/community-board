@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 const SEARCH_PROTOCOL = {
   type: null,
   title: null,
@@ -47,15 +49,28 @@ export default {
       READ_STATE_LIST: READ_STATE
     }
   },
-  mounted () {
-    this.reset()
+  beforeMount () {
+    var searchProtocol = JSON.parse(this.$localStorage.get('searchProtocol'))
+    if (searchProtocol === null) {
+      this.reset()
+    } else {
+      if (_.isEqual(Object.keys(searchProtocol), Object.keys(SEARCH_PROTOCOL))) {
+        this.searchProtocol = searchProtocol
+        this.$emit('searching', this.searchProtocol)
+      } else {
+        this.reset()
+      }
+    }
   },
   methods: {
     search (e) {
+      this.$localStorage.set('searchProtocol', JSON.stringify(this.searchProtocol))
       this.$emit('searching', this.searchProtocol)
     },
     reset () {
       this.searchProtocol = Object.assign({}, SEARCH_PROTOCOL)
+      this.$localStorage.set('searchProtocol', null)
+      this.$emit('searching', this.searchProtocol)
     }
   }
 }
