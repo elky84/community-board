@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <h2><i class="fas fa-language"></i>커뮤니티 보드</h2>
+  <div id="app container-fluid" align="left" height="100%">
+    <h2><i class="fas fa-language"></i><span class="head-text">커뮤니티 보드</span></h2>
     <router-view/>
   </div>
 </template>
@@ -12,39 +12,7 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  margin-top: 40px;
+.head-text {
+  font-size: 20px;
 }
-
-table {
-  width: 100%;
-}
-
-.element {
-  font-size: 12px;
-}
-
-.form-control {
-  font-size: 12px;
-}
-
-.label {
-  font-size: 12px;
-}
-
-.nav {
-  font-size: 12px;
-}
-
-.dropdown-item {
-  font-size: 12px;
-}
-
-.badge.block-badge {
-  display: block;
-}
-
 </style>
