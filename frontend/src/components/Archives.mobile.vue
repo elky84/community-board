@@ -192,8 +192,8 @@ export default {
       return abbreviate(number)
     },
     substr (str) {
-      if (str.length > 25) {
-        return str.substr(0, 25) + '...'
+      if (str.length > 30) {
+        return str.substr(0, 30) + '...'
       }
       return str
     }
@@ -246,19 +246,19 @@ table {
 }
 
 .badge {
-  font-size: 9px;
+  font-size: 8px;
 }
 .header {
-  font-size: 9px;
+  font-size: 8px;
 }
 .title {
-  font-size: 10px;
-}
-.count {
   font-size: 9px;
 }
+.count {
+  font-size: 8px;
+}
 .time {
-  font-size: 7px;
+  font-size: 8px;
 }
 
 .cursor-pointer.unread {
