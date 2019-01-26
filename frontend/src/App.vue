@@ -13,6 +13,7 @@ export default {
 
 <style>
 .head-text {
-  font-size: 20px;
+  font-size: 30px !important;
+  font-weight: bold;
 }
 </style>

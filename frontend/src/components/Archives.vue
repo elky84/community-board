@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-fluid">
     <archives-pc v-if="!isMobile"></archives-pc>
     <archives-mobile v-if="isMobile"></archives-mobile>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div>
     <archives-searchForm @searching="parentSearching(... arguments)" ref="searchForm"
       :ARCHIVE_TYPE_LIST="ARCHIVE_TYPE_LIST"></archives-searchForm>
 
@@ -27,7 +27,7 @@
       <tbody>
         <template v-for="(archive, index) in archives">
           <tr class="cursor-pointer" :class="tdColoring(archive)" :key="archive._id" @click.prevent="onClickLink(archive, index)">
-            <td align="center"><span class="badge block-badge" v-bind:class=ARCHIVE_TYPE_LIST[archive.type].label>
+            <td align="center"><span class="badge badge block-badge" v-bind:class=ARCHIVE_TYPE_LIST[archive.type].label>
               {{ARCHIVE_TYPE_LIST[archive.type].text}}
             </span></td>
             <td align="left"><span class="title"><a v-bind:href=archive.link>{{ substr(archive.title) }}</a></span></td>
@@ -88,8 +88,7 @@ export default {
   name: 'Archives',
   components: {
     ArchivesSearchForm: ArchivesSearchForm,
-    Paginate,
-    abbreviate
+    Paginate
   },
   data () {
     return {
@@ -102,7 +101,7 @@ export default {
       limit: 20,
       searchData: {},
       sort: undefined,
-      orderState: {title: null, type: null, count: null, date: null}
+      orderState: { title: null, type: null, count: null, date: null }
     }
   },
   mounted () {
@@ -115,7 +114,7 @@ export default {
       this.searchData = searchData
 
       var vm = this
-      this.$http.get(`${process.env.URL_BACKEND}/api/archives`, {
+      this.$http.get(`${process.env.VUE_APP_URL_BACKEND}/api/archives`, {
         params: {
           offset: this.limit * (this.currentPage - 1),
           limit: this.limit,
@@ -128,7 +127,7 @@ export default {
             encode: false,
             arrayFormat: 'repeat'
           })
-        }})
+        } })
         .then((result) => {
           this.viewPageCount = Math.ceil(result.data.total / this.limit)
           this.totalItems = result.data.total
@@ -164,7 +163,7 @@ export default {
         }
       }
 
-      this.sort = {[key]: this.orderState[key]}
+      this.sort = { [key]: this.orderState[key] }
 
       this.getArchives(this.searchData)
     },
@@ -181,18 +180,20 @@ export default {
     onClickLink (archive, index) {
       archive.read = true
       var vm = this
-      this.$http.put(`${process.env.URL_BACKEND}/api/archives/${archive._id}`, archive).then((result) => {
-        vm.archives[index] = archive
-        vm.$forceUpdate()
-        window.open(archive.link, '_blank')
+      this.$http.put(`${process.env.VUE_APP_URL_BACKEND}/api/archives/${archive._id}`, archive).then((result) => {
+        if (result != null) {
+          vm.archives[index] = archive
+          vm.$forceUpdate()
+          window.open(archive.link, '_blank')
+        }
       })
     },
     abbreviation (number) {
       return abbreviate(number)
     },
     substr (str) {
-      if (str.length > 30) {
-        return str.substr(0, 30) + '...'
+      if (str.length > 25) {
+        return str.substr(0, 25) + '...'
       }
       return str
     }
@@ -200,10 +201,7 @@ export default {
 }
 </script>
 
-<style>
-html * {
-  font-size: 98%;
-}
+<style scoped>
 table {
   width: 100%;
 }
@@ -248,10 +246,10 @@ table {
 }
 
 .badge {
-  font-size: 10px;
+  font-size: 9px;
 }
 .header {
-  font-size: 10px;
+  font-size: 9px;
 }
 .title {
   font-size: 10px;
@@ -260,7 +258,7 @@ table {
   font-size: 9px;
 }
 .time {
-  font-size: 8px;
+  font-size: 7px;
 }
 
 .cursor-pointer.unread {

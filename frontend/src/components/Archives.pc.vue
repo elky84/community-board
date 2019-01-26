@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div>
     <archives-searchForm @searching="parentSearching(... arguments)" ref="searchForm"
       :ARCHIVE_TYPE_LIST="ARCHIVE_TYPE_LIST"></archives-searchForm>
 
@@ -88,8 +88,7 @@ export default {
   name: 'Archives',
   components: {
     ArchivesSearchForm: ArchivesSearchForm,
-    Paginate,
-    abbreviate
+    Paginate
   },
   data () {
     return {
@@ -102,7 +101,7 @@ export default {
       limit: 20,
       searchData: {},
       sort: undefined,
-      orderState: {title: null, type: null, count: null, date: null}
+      orderState: { title: null, type: null, count: null, date: null }
     }
   },
   mounted () {
@@ -115,7 +114,7 @@ export default {
       this.searchData = searchData
 
       var vm = this
-      this.$http.get(`${process.env.URL_BACKEND}/api/archives`, {
+      this.$http.get(`${process.env.VUE_APP_URL_BACKEND}/api/archives`, {
         params: {
           offset: this.limit * (this.currentPage - 1),
           limit: this.limit,
@@ -128,7 +127,7 @@ export default {
             encode: false,
             arrayFormat: 'repeat'
           })
-        }})
+        } })
         .then((result) => {
           this.viewPageCount = Math.ceil(result.data.total / this.limit)
           this.totalItems = result.data.total
@@ -164,7 +163,7 @@ export default {
         }
       }
 
-      this.sort = {[key]: this.orderState[key]}
+      this.sort = { [key]: this.orderState[key] }
 
       this.getArchives(this.searchData)
     },
@@ -181,10 +180,12 @@ export default {
     onClickLink (archive, index) {
       archive.read = true
       var vm = this
-      this.$http.put(`${process.env.URL_BACKEND}/api/archives/${archive._id}`, archive).then((result) => {
-        vm.archives[index] = archive
-        vm.$forceUpdate()
-        window.open(archive.link, '_blank')
+      this.$http.put(`${process.env.VUE_APP_URL_BACKEND}/api/archives/${archive._id}`, archive).then((result) => {
+        if (result != null) {
+          vm.archives[index] = archive
+          vm.$forceUpdate()
+          window.open(archive.link, '_blank')
+        }
       })
     },
     abbreviation (number) {
@@ -194,33 +195,9 @@ export default {
 }
 </script>
 
-<style>
-html * {
-  font-size: 98%;
-}
-
+<style scoped>
 table {
   width: 100%;
-}
-
-.element {
-  font-size: 12px;
-}
-
-.form-control {
-  font-size: 12px;
-}
-
-.label {
-  font-size: 12px;
-}
-
-.nav {
-  font-size: 12px;
-}
-
-.dropdown-item {
-  font-size: 12px;
 }
 
 .badge.block-badge {
@@ -251,19 +228,24 @@ table {
 }
 
 .badge {
-  font-size: 12px;
+  font-size: 1em !important;
+  font-family: Arial !important;
 }
 .header {
-  font-size: 12px;
+  font-size: 1em !important;
+  font-family: Arial !important;
 }
 .count {
-  font-size: 12px;
+  font-size: 1em !important;
+  font-family: Arial !important;
 }
 .time {
-  font-size: 12px;
+  font-size: 1em !important;
+  font-family: Arial !important;
 }
 .title {
-  font-size: 13px;
+  font-size: 1em !important;
+  font-family: Arial !important;
 }
 
 .cursor-pointer.unread {
