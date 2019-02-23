@@ -7,6 +7,8 @@ import axios from 'axios'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 import moment from 'moment'
 
+import bPagination from 'bootstrap-vue/es/components/pagination/pagination'
+
 import 'expose-loader?$!expose-loader?jQuery!jquery'
 import 'bootstrap'
 import '@/assets/css/main.css'

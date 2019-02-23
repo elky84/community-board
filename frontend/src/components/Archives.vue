@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
-    <archives-pc v-if="!isMobile"></archives-pc>
-    <archives-mobile v-if="isMobile"></archives-mobile>
+    <archives-pc :archive-types="archiveTypes" v-if="!isMobile"></archives-pc>
+    <archives-mobile :archive-types="archiveTypes" v-if="isMobile"></archives-mobile>
   </div>
 </template>
 
