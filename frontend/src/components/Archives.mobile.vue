@@ -37,7 +37,7 @@
       </tbody>
     </table>
 
-    <b-pagination size="md" v-model="currentPage" :limit="limit" :total-rows="totalItems" :per-page="limit" @change="getEvents(... arguments)" />
+    <b-pagination size="md" v-model="currentPage" :limit="limit" :total-rows="totalItems" :per-page="limit" @change="listing(... arguments)" />
   </div>
 </template>
 
@@ -117,7 +117,6 @@ export default {
     },
     listing (page) {
       this.currentPage = page
-      this.$refs.paginate.value = page
       this.getArchives(this.searchData)
     },
     sortBy (key) {

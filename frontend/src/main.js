@@ -21,6 +21,8 @@ Vue.prototype.moment = moment
 Vue.use(VueLocalStorage)
 Vue.use(BootstrapVue)
 
+Vue.component('b-pagination', bPagination)
+
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
