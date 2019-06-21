@@ -5,6 +5,10 @@ var app         = express();
 var bodyParser  = require('body-parser');
 var mongoose    = require('mongoose');
 var cors        = require('cors');
+var fs          = require('fs');
+
+var config      = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+console.log("config: " + JSON.stringify(config));
 
 app.use(cors())
 
@@ -16,8 +20,12 @@ db.once('open', function(){
 });
 
 mongoose.Promise = require('bluebird')
-var promise = mongoose.connect('mongodb://localhost/test_crawler', {
-    useMongoClient: true
+
+var promise = mongoose.connect(config.mongoose.connectionString, {
+    "auth": {"authSource": config.mongoose.authSource},
+    "user": config.mongoose.user,
+    "pass": config.mongoose.pass,
+    "useMongoClient": true
 });
 
 // DEFINE MODEL

@@ -1,0 +1,8 @@
+{
+    "mongoose": {
+        "connectionString":"mongodb://localhost:27017/test_crawler", 
+        "user":"", 
+        "pass":"",
+        "authSource": ""
+    }
+}
