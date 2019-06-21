@@ -16,6 +16,6 @@
     "moment": "^2.22.2",
     "mongoose": "^4.4.5",
     "mongoose-paginate": "^5.0.3",
-    "open": "0.0.5"
+    "open": ">=6.0.0"
   }
 }
