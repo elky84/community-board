@@ -22,11 +22,19 @@ export const ARCHIVES_TYPES = {
   },
   RuliwebHumor: {
     text: '루리웹유머',
-    label: 'badge-info'
+    label: 'badge-warning'
   },
   RuliwebHotdeal: {
     text: '루리웹핫딜',
+    label: 'badge-warning'
+  },
+  ThisisgamePad: {
+    text: '티그_퍼드',
     label: 'badge-dark'
+  },
+  FmKorea: {
+    text: '에펨코',
+    label: 'badge-light'
   }
 }
 
