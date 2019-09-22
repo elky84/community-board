@@ -28,8 +28,20 @@ export const ARCHIVES_TYPES = {
     text: '루리웹핫딜',
     label: 'badge-warning'
   },
+  RuliwebConsoleNews: {
+    text: '루리웹콘솔뉴스',
+    label: 'badge-warning'
+  },
+  RuliwebPcNews: {
+    text: '루리웹PC뉴스',
+    label: 'badge-warning'
+  },
+  InvenEsports: {
+    text: '인벤_E스포츠',
+    label: 'badge-dark'
+  },
   ThisisgamePad: {
-    text: '티그_퍼드',
+    text: 'TIG퍼드',
     label: 'badge-dark'
   },
   FmKorea: {
